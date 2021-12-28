@@ -5,9 +5,11 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' 
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import ToggleButton from "./ToggleButton";
 
 export function Calendar() {
   const [country, setCountry] = useState('');
+  
   const [year, setYear] = useState('');
   const [publicHoliday, setPublicHoliday] = useState([]);
   const eventHoliday = [];
@@ -25,8 +27,8 @@ export function Calendar() {
     }
   `;
 
-
   useEffect(() => {
+    
     getGeoInfo();
     getPublicHoliday();
   },[year,country]);
@@ -63,11 +65,13 @@ export function Calendar() {
   
     return (
       <>
+        <ToggleButton/>
         <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             events={setEvent()}
             initialView="dayGridMonth"
             height= "45em"
+            eventBackgroundColor='#ff0000'
             headerToolbar={
             {start: 'title',
             end: 'prev,next' }
